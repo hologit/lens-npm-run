@@ -7,16 +7,24 @@
   NPM_RUN_COMMAND="${HOLOLENS_NPM_RUN_COMMAND?hololens.npm-run.command required}"
   NPM_RUN_INSTALL="${HOLOLENS_NPM_RUN_INSTALL:-npm install --no-audit}"
   NPM_RUN_ENV="${HOLOLENS_NPM_RUN_ENV:-production}"
-  OUTPUT_DIR="${HOLOLENS_NPM_RUN_OUTPUT_DIR:-dist}"
+  OUTPUT_DIR="${HOLOLENS_NPM_RUN_OUTPUT_DIR}"
 
   if [ "$(git cat-file -t ${DATA_TREE} 2> /dev/null)" != "tree" ]; then
     echo "hololens.data '${DATA_TREE}' is not a reachable tree"
     exit 1;
   fi
 
+
   # set up environment
+  echo "Exporting data tree to scratch directory: ${DATA_TREE}"
   git holo lens export-tree "${DATA_TREE}"
+
+  echo "Configuring environment: CI=true"
   export CI="true"
+
+  echo "Configuring environment: NODE_ENV=${NPM_RUN_ENV}"
+  export NODE_ENV="${NPM_RUN_ENV}"
+
 
   # execute npm install
   echo
@@ -29,10 +37,11 @@
     exit ${install_status}
   fi
 
+
   # execute configured command
   echo
-  echo "Running: NODE_ENV=\"${NPM_RUN_ENV}\" ${NPM_RUN_COMMAND}"
-  NODE_ENV="${NPM_RUN_ENV}" npm run ${NPM_RUN_COMMAND}
+  echo "Running: npm run ${NPM_RUN_COMMAND}"
+  command_output=$(npm run --silent ${NPM_RUN_COMMAND})
   command_status=$?
 
   if [ $command_status -ne 0 ]; then
@@ -42,10 +51,18 @@
 
   echo -e "\n${NPM_RUN_COMMAND} completed successfully"
 
-  # add output to git index
-  git add "${OUTPUT_DIR}"
+
+  # add output to git index if OUTPUT_DIR is declared
+  if [ -n "${OUTPUT_DIR}" ]; then
+    git add "${OUTPUT_DIR}"
+  fi
 
 } 1>&2
 
+
 # output tree hash
-git write-tree --prefix="${OUTPUT_DIR}"
+if [ -n "${OUTPUT_DIR}" ]; then
+  git write-tree --prefix="${OUTPUT_DIR}"
+else
+  echo "${command_output}"
+fi
