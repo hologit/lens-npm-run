@@ -1,6 +1,6 @@
 pkg_name=lens-npm-run
 pkg_origin=holo
-pkg_version="0.1.1"
+pkg_version="0.2.0"
 pkg_maintainer="Chris Alfano <chris@jarv.us>"
 pkg_license=("MIT")
 
