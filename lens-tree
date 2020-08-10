@@ -3,7 +3,7 @@
 # redirect all output to stderr
 {
   INPUT_TREE="${1?<input> required}"
-  DATA_TREE="${HOLOLENS_DATA?data tree required}"
+  DATA_TREE="${HOLOLENS_DATA:-${INPUT_TREE}}"
   NPM_RUN_COMMAND="${HOLOLENS_NPM_RUN_COMMAND?hololens.npm-run.command required}"
   NPM_RUN_INSTALL="${HOLOLENS_NPM_RUN_INSTALL:-npm ci}"
   NPM_RUN_ENV="${HOLOLENS_NPM_RUN_ENV:-production}"
