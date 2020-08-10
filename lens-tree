@@ -5,7 +5,7 @@
   INPUT_TREE="${1?<input> required}"
   DATA_TREE="${HOLOLENS_DATA?data tree required}"
   NPM_RUN_COMMAND="${HOLOLENS_NPM_RUN_COMMAND?hololens.npm-run.command required}"
-  NPM_RUN_INSTALL="${HOLOLENS_NPM_RUN_INSTALL:-npm install --no-audit}"
+  NPM_RUN_INSTALL="${HOLOLENS_NPM_RUN_INSTALL:-npm ci}"
   NPM_RUN_ENV="${HOLOLENS_NPM_RUN_ENV:-production}"
   OUTPUT_DIR="${HOLOLENS_NPM_RUN_OUTPUT_DIR}"
 
