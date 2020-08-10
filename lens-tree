@@ -38,6 +38,10 @@
   fi
 
 
+  # fix interpreters
+  sed -e "s#\#\!/usr/bin/env node#\#\!$(hab pkg path core/node)/bin/node#" --in-place --follow-symlinks node_modules/.bin/*
+
+
   # execute configured command
   echo
   echo "Running: npm run ${NPM_RUN_COMMAND}"
