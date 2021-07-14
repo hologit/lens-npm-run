@@ -58,7 +58,7 @@
 
   # add output to git index if OUTPUT_DIR is declared
   if [ -n "${OUTPUT_DIR}" ]; then
-    git add "${OUTPUT_DIR}"
+    git add -f "${OUTPUT_DIR}"
   fi
 
 } 1>&2
