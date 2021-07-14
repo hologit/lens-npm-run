@@ -39,7 +39,7 @@
 
 
   # fix interpreters
-  sed -e "s#\#\!/usr/bin/env node#\#\!$(hab pkg path core/node)/bin/node#" --in-place --follow-symlinks node_modules/.bin/*
+  sed -e "s#\#\!/usr/bin/env node#\#\!$(hab pkg path core/node14)/bin/node#" --in-place --follow-symlinks node_modules/.bin/*
 
 
   # execute configured command
