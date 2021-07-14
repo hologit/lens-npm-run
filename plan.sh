@@ -1,6 +1,6 @@
 pkg_name=lens-npm-run
 pkg_origin=holo
-pkg_version="0.3"
+pkg_version="12"
 pkg_maintainer="Chris Alfano <chris@jarv.us>"
 pkg_license=("Apache-2.0")
 
@@ -8,7 +8,7 @@ pkg_deps=(
   core/bash
   core/gcc
   core/make
-  core/node
+  core/node12
   jarvus/hologit
 )
 
