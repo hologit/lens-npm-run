@@ -9,6 +9,7 @@ pkg_deps=(
   core/gcc
   core/make
   core/node14
+  core/python39
   jarvus/hologit
 )
 
