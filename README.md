@@ -6,7 +6,7 @@ Use npm to run a script
 
 ```toml
 [hololens]
-package = "holo/lens-npm-run/12" # node12 and node14 are available
+package = "holo/lens-npm-run/12" # node12, node14, and node16 are available
 
 [hololens.npm-run]
 # env = "production" # change to development if you need devDependencies installed
